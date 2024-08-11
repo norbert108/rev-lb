@@ -21,4 +21,17 @@ public class WorkerLoads {
     public synchronized void decrementLoad(int workerId) {
         workerLoads.set(workerId, workerLoads.get(workerId) - 1);
     }
+
+    public synchronized int getLowestLoad() {
+        int lowestLoad = workerLoads.getFirst();
+        int lowestLoadInd = 0;
+        for (int i = 0; i < workerLoads.size(); i++) {
+            int load = workerLoads.get(i);
+            if (lowestLoad > load) {
+                lowestLoad = load;
+                lowestLoadInd = i;
+            }
+        }
+        return lowestLoadInd;
+    }
 }

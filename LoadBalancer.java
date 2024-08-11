@@ -12,14 +12,16 @@ public class LoadBalancer {
                     .map(Worker::new)
                     .toList();
             WorkerLoads workerLoads = new WorkerLoads(workers.size());
+//            Scheduler scheduler = new RoundRobin(workers.size());
+            Scheduler scheduler = new LowestLoad(workerLoads);
 
             ServerSocket lbSocket = new ServerSocket(12345);
 
             while (!Thread.interrupted()) {
                 Socket clientSocket = lbSocket.accept();
-
-
-                System.out.println("xd");
+                int workerId = scheduler.schedule();
+                new Thread(new WorkerTask(clientSocket, workerLoads, workerId)).start();
+                System.out.println("TASK SCHEDULED: " + workerId);
             }
         } catch (Exception e) {
             e.printStackTrace();
