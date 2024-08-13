@@ -1,4 +1,5 @@
-import java.io.BufferedInputStream;
+package scr;
+
 import java.net.Socket;
 
 public class WorkerTask implements Runnable{

@@ -1,3 +1,5 @@
+package scr;
+
 public class LowestLoad implements Scheduler {
     private WorkerLoads workerLoads;
 

@@ -1,3 +1,5 @@
+package scr;
+
 public class Worker {
     private String host;
     private Integer port;
